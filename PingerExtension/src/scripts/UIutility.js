@@ -10,6 +10,7 @@ var UIUtility = function () {
         if (obj.taskType == config.taskType.webSite) {
             updatingRow.getElementsByTagName("input")[0].setAttribute('data-original-title', obj.value.website);
             updatingRow.getElementsByTagName("input")[1].setAttribute('data-original-title', obj.value.email);
+            updatingRow.getElementsByTagName("input")[1].placeholder = '';
         }
         //TODO for database and server
 
@@ -140,7 +141,7 @@ var UIUtility = function () {
         elementEmail.setAttribute('data-original-title',
             dataObj.email == '' ? "email@gmail.com" : dataObj.email);
         elementEmail.className = "form-control customToolTip";
-        elementEmail.placeholder = "Email seperated by ,";
+        elementEmail.placeholder = ", seperated emails";
         elementEmail.value = dataObj.email;
         cellEmail.appendChild(elementEmail);
 
@@ -235,6 +236,7 @@ var UIUtility = function () {
 
         if (data != null) {
             elementEmail.disabled = true;
+            elementEmail.placeholder = ''
             elementWebSite.disabled = true;
             elementSave.disabled = true;
         }
