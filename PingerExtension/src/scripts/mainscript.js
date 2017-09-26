@@ -24,13 +24,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('btnConfirmReset').addEventListener('click', events.btnConfirmResetClick);
 
+    document.getElementById('settingsTab').addEventListener('click', events.clearSettingsValidationMsg);
+
     //This event will update the UI based on the updates in the local storage
     window.addEventListener('storage', events.storageChanged);
 
 });
 
-
 var events = function () {
+
+    var clearSettingsValidationMsg = function () {
+        var lblSaveSettingsVal = document.getElementById('lblSaveSettingsVal');
+        if (lblSaveSettingsVal.innerHTML == config.messages.updateSuccess) {
+            lblSaveSettingsVal.innerHTML = '';
+        }
+    }
 
     var btnSaveSettingsClick = function () {
 
@@ -118,7 +126,8 @@ var events = function () {
         btnAddServerClick: btnAddServerClick,
         btnAddDBClick: btnAddDBClick,
         btnConfirmResetClick: btnConfirmResetClick,
-        storageChanged: storageChanged
+        storageChanged: storageChanged,
+        clearSettingsValidationMsg: clearSettingsValidationMsg
     }
 
 }();
