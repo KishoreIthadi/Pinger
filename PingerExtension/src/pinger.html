@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <title>Pinger</title>
+
+    <link href="css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div>
+
+        <div class="header">
+            <img alt="Pinger" class="headerlogo" src="images/pingerX32.png">
+            <span>INGER</span>
+        </div>
+        <hr>
+
+        <div>
+            <div class="tabpanel">
+                <ul class="nav nav-default nav-tabs text-center">
+                    <li class="active"><a data-toggle="tab" href="#tabwebsite">Website</a></li>
+                    <li><a data-toggle="tab" href="#tabserver">Server/Remote Desktop</a></li>
+                    <li><a data-toggle="tab" href="#tabDB">Database</a></li>
+                    <li><a data-toggle="tab" href="#tabSettings" id="settingsTab">Settings</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="active tab-pane fade in overflowAuto" id="tabwebsite">
+                        <table id="tblWebSite" class="table">
+                        </table>
+                        <label id="lblWebsiteVal" class="mar10-left failure"></label>
+                        <button type="button" class="btn btn-sm btn-success mar10-right pull-right" id="btnAddWebSite">
+                            <span class="glyphicon glyphicon-plus"></span> Add 
+                        </button>
+                    </div>
+                    <div class="tab-pane fade overflowAuto" id="tabserver">
+                        <p class="mar5">In Development</p>
+                        <table id="tblServer" class="table">
+                        </table>
+                        <button type="button" class="btn btn-sm btn-success mar10-right pull-right" id="btnAddServer">
+                                <span class="glyphicon glyphicon-plus"></span> Add 
+                        </button>
+                    </div>
+                    <div class="fade tab-pane overflowAuto" id="tabDB">
+                        <p class="mar5">In Development</p>
+                        <table class="borderless table table-sm" id="tblDB">
+                        </table>
+                        <button type="button" class="btn btn-sm btn-success mar10-right pull-right" id="btnAddDB">
+                                <span class="glyphicon glyphicon-plus"></span> Add 
+                        </button>
+                    </div>
+                    <div class="fade tab-pane overflowAuto" id="tabSettings">
+                        <div class="mar10">
+                            <div class="form-group">
+                                <label for="txtGolbalEmail">Global Email address:</label>
+                                <input type="email" class="form-control" id="txtGolbalEmail" placeholder="Multiple emails seperated by ,">
+                            </div>
+                            <div class="form-group">
+                                <label for="txtRunInterval">Run Interval In Minutes:</label>
+                                <input type="number" class="form-control" id="txtRunInterval" min="5" max="180">
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" id="cbEnableNotifications">Enable Desktop Notifications</label>
+                            </div>
+                            <button type="submit" class="btn btn-success" id="btnSaveSettings">Save</button>
+                            <label id="lblSaveSettingsVal" class="success"></label>
+                            <br><br>
+                            <hr>
+                            <button type="submit" class="btn btn-block btn-danger" id="btnResetPlugin" data-toggle="modal" data-target="#resetModal">Rest Pinger Plugin</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="resetModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p>Do you want to delete all the data and reset the plugin?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" id="btnConfirmReset">Yes</button>
+                        <button class="btn btn-danger" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <hr>
+
+    </div>
+</body>
+
+<script src="scripts/lib/jquery.min.js"></script>
+<script src="scripts/lib/bootstrap.min.js"></script>
+
+<script src="scripts/config.js"></script>
+<script src="scripts/helperutility.js"></script>
+<script src="scripts/notificationutility.js"></script>
+<script src="scripts/localstorageutility.js"></script>
+<script src="scripts/settingsutility.js"></script>
+<script src="scripts/validationutility.js"></script>
+<script src="scripts/APIutility.js"></script>
+<script src="scripts/UIutility.js"></script>
+<script src="scripts/mainscript.js"></script>
+
+</html>
