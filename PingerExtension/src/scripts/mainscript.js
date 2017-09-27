@@ -35,7 +35,7 @@ var events = function () {
 
     var clearSettingsValidationMsg = function () {
         var lblSaveSettingsVal = document.getElementById('lblSaveSettingsVal');
-        if (lblSaveSettingsVal.innerHTML == config.messages.updateSuccess) {
+        if (lblSaveSettingsVal.innerHTML == 'Updated Sucessfully') {
             lblSaveSettingsVal.innerHTML = '';
         }
     }
