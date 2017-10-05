@@ -2,7 +2,7 @@
 
 var APIUtility = (function () {
 
-    var checkWebSiteStatus = function checkWebSiteStatus(keys, isBackGroundTask) {
+    var checkStatus = function checkWebSiteStatus(keys, isBackGroundTask) {
 
         // list which will be sent to API
         var localStorageList = [];
@@ -14,7 +14,7 @@ var APIUtility = (function () {
 
             localStorageList.push({
                 "taskType": obj.taskType,
-                'value': obj.value.website,
+                'entity': obj.value.entity,
                 'previousState': obj.previousStatus,
                 'updatedState': obj.previousStatus,
                 'toEmail': obj.value.email,
@@ -27,7 +27,7 @@ var APIUtility = (function () {
             localStorageUtility.updateItem(key, obj);
 
             // updating UI
-            // We will not update the UI since it is a background task
+            // We will not update the UI if it is a background task
             if (!isBackGroundTask) {
                 UIUtility.updateStatus(key);
             }
@@ -35,13 +35,13 @@ var APIUtility = (function () {
 
         var entitiesPerRequest = config.defaultSettings.entitiesPerRequest;
 
-        for (var i = 0; i < localStorageList.length / entitiesPerRequest; i++) {
+        for (var i = 0; i < Math.ceil(localStorageList.length / entitiesPerRequest); i++) {
 
-            var items = localStorageList.slice(0, entitiesPerRequest);
+            var items = localStorageList.slice(i * entitiesPerRequest, (i * entitiesPerRequest) + entitiesPerRequest);
 
-            return $.ajax({
+            $.ajax({
                 method: "POST",
-                url: config.URL.websiteURL,
+                url: config.URL.statusURL,
                 dataType: "JSON",
                 contentType: "application/json",
                 data: JSON.stringify(items),
@@ -64,9 +64,9 @@ var APIUtility = (function () {
                         updatedObj.status = item.UpdatedState;
                         updatedObj.previousStatus = item.UpdatedState;
 
-                        updatedObj.lastRunAt = new Date();
-                        var dateTime = new Date(updatedObj.lastRunAt);
-                        updatedObj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + settingsObj.interval));
+                        //updatedObj.lastRunAt = new Date();
+                        //var dateTime = new Date(updatedObj.lastRunAt);
+                        //updatedObj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + settingsObj.interval));
 
                         updatedObj.unableToRetrive = false;
 
@@ -87,15 +87,14 @@ var APIUtility = (function () {
                         obj.unableToRetrive = true;
                         obj.status = obj.previousStatus;
 
-                        obj.lastRunAt = new Date();
-                        var dateTime = new Date(obj.lastRunAt);
-                        obj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + settingsObj.interval));
+                        // obj.lastRunAt = new Date();
+                        // var dateTime = new Date(obj.lastRunAt);
+                        // obj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + settingsObj.interval));
 
                         localStorageUtility.updateItem(item.key, obj);
 
                         // updating UI
                         // We will not update the UI if it is a background task
-                        // when user will open the UI, it is populated based on the local storage
                         if (!isBackGroundTask) {
                             UIUtility.updateStatus(item.key);
                         }
@@ -104,13 +103,6 @@ var APIUtility = (function () {
                 }
             });
         }
-    }
-
-    var checkServerStatus = function checkServerStatus(keys, isBackGroundTask) {
-        return true;
-    }
-
-    var checkDatabaseStatus = function checkDatabaseStatus(keys, isBackGroundTask) {
         return true;
     }
 
@@ -139,9 +131,7 @@ var APIUtility = (function () {
     }
 
     return {
-        checkWebSiteStatus: checkWebSiteStatus,
-        checkServerStatus: checkServerStatus,
-        checkDatabaseStatus: checkDatabaseStatus,
+        checkStatus: checkStatus,
         sendEmail: sendEmail
     }
 

@@ -56,9 +56,9 @@ var backgroundUtility = function () {
 
                     Promise
                         .all([
-                            APIUtility.checkWebSiteStatus(websiteList, true),
-                            APIUtility.checkDatabaseStatus(DBList, true),
-                            APIUtility.checkServerStatus(serverList, true)
+                            APIUtility.checkStatus(websiteList, true),
+                            APIUtility.checkStatus(DBList, true),
+                            APIUtility.checkStatus(serverList, true)
                         ]).then(function (values) {
                             notificationUtility.checkPendingNotifications();
                             updateSettings();
@@ -80,6 +80,7 @@ var backgroundUtility = function () {
     var updateInterval = function () {
         helperUtility.logMessage(new Date() + " Interval Updated ************************", config.messageType.log);
         clearInterval(startProcess);
+        updateSettings();
         startTimer();
     }
 
@@ -89,7 +90,7 @@ var backgroundUtility = function () {
         settingsObj.lastRunAt = new Date();
         var dateTime = new Date(settingsObj.lastRunAt);
         settingsObj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + settingsObj.interval));
-        localStorageUtility.updateItem("settings", settingsObj);
+       localStorageUtility.updateItem("settings", settingsObj);
     }
 
     return {

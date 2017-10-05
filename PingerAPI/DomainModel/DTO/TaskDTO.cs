@@ -3,7 +3,7 @@
     public class TaskDTO
     {
         public int TaskType { get; set; }
-        public string Value { get; set; }
+        public string Entity { get; set; }
         public int PreviousState { get; set; }
         public int UpdatedState { get; set; }
         public string ToEmail { get; set; }

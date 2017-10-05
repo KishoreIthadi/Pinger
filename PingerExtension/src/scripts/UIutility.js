@@ -2,17 +2,14 @@
 
 var UIUtility = function () {
 
-    function updateStatus(key) {
+    var updateStatus = function (key) {
 
         var obj = localStorageUtility.retriveItem(key);
         var updatingRow = document.getElementById(key);
 
-        if (obj.taskType == config.taskType.webSite) {
-            updatingRow.getElementsByTagName("input")[0].setAttribute('data-original-title', obj.value.website);
-            updatingRow.getElementsByTagName("input")[1].setAttribute('data-original-title', obj.value.email);
-            updatingRow.getElementsByTagName("input")[1].placeholder = '';
-        }
-        //TODO for database and server
+        updatingRow.getElementsByTagName("input")[0].setAttribute('data-original-title', obj.value.entity);
+        updatingRow.getElementsByTagName("input")[1].setAttribute('data-original-title', obj.value.email);
+        updatingRow.getElementsByTagName("input")[1].placeholder = '';
 
         var img = updatingRow.getElementsByTagName('img')[0];
         var toolTip = '';
@@ -33,11 +30,15 @@ var UIUtility = function () {
             }
         }
 
-        toolTip += ", nextRunAt: " + helperUtility.formatDate(new Date(obj.nextRunAt));
+        //toolTip += ", nextRunAt: " + helperUtility.formatDate(new Date(obj.nextRunAt));
+
+        var settings = localStorageUtility.retriveItem("settings");
+        toolTip += ", nextRunAt: " + helperUtility.formatDate(new Date(settings.nextRunAt));
+
         img.setAttribute('data-original-title', toolTip);
     }
 
-    function populateUI() {
+    var populateUI = function () {
 
         var localStorageKeys = localStorageUtility.retriveAllKeys();
 
@@ -55,34 +56,53 @@ var UIUtility = function () {
                     document.getElementById('cbEnableNotifications').checked = obj.enableNotifications;
 
                 } else {
-                    switch (obj.taskType) {
-                        case config.taskType.webSite:
-                            addWebsite(key, obj);
-                            break;
-                        case config.taskType.server:
-                            //TODO
-                            break;
-                        case config.taskType.database:
-                            //TODO
-                            break;
-                    }
+                    addEntity(key, obj, obj.taskType);
                 }
             }
         }
     }
 
-    // Adds new row into tblWesite UI for user to add new website
-    // This method is used for populating new UI ad also populating ui with existing data
-    function addWebsite(rowID, data) {
+    // This method is used for populating new UI and also populating ui with existing data
+    var addEntity = function (rowID, data, type) {
 
         //Disabling btnAddNewRow until the existing row gets valid
-        var btnAddWebSite = document.getElementById("btnAddWebSite");
-        btnAddWebSite.disabled = true;
+        var btnAdd = null;
+        var table = null;
+        var validationLbl = null;
+
+        var placeholder = null;
+        var tooltip = null;
+
+
+        switch (type) {
+            case config.taskType.webSite:
+                btnAdd = document.getElementById("btnAddWebSite");
+                table = document.getElementById("tblWebSite");
+                validationLbl = document.getElementById('lblWebsiteVal');
+                placeholder = "URL or IP";
+                tooltip = "http://google.com";
+                break;
+            case config.taskType.server:
+                btnAdd = document.getElementById("btnAddServer");
+                table = document.getElementById("tblServer");
+                validationLbl = document.getElementById('lblServerVal');
+                placeholder = "IP:port";
+                tooltip = "Default Port Windows:3389, Linux:22";
+                break;
+            case config.taskType.database:
+                btnAdd = document.getElementById("btnAddDB");
+                table = document.getElementById("tblDB");
+                validationLbl = document.getElementById('lblDBVal');
+                placeholder = "IP:port";
+                tooltip = "Default Port SQL Server:1433, Oracle: 1521";
+        }
+
+        btnAdd.disabled = true;
 
         var settings = localStorageUtility.retriveItem("settings");
 
         var dataObj = {
-            "webSite": '',
+            "entity": '',
             "email": settings != null ? settings.globalEmail : '',
             "imageSrc": '',
             rowID: '',
@@ -91,7 +111,7 @@ var UIUtility = function () {
         }
 
         if (data != null) {
-            dataObj.webSite = data.value.website;
+            dataObj.entity = data.value.entity;
             dataObj.email = data.value.email;
             dataObj.status = data.value.status;
 
@@ -109,8 +129,8 @@ var UIUtility = function () {
                 dataObj.imageSrc = '/images/failed.png';
             }
 
-            dataObj.statusToolTip += ", nextRunAt:" + helperUtility.formatDate(new Date(data.nextRunAt));
-            btnAddWebSite.disabled = false;
+            dataObj.statusToolTip += ", nextRunAt:" + helperUtility.formatDate(new Date(settings.nextRunAt));
+            btnAdd.disabled = false;
         }
 
         if (rowID == null || rowID == 'undefined') {
@@ -119,22 +139,18 @@ var UIUtility = function () {
             dataObj.rowID = rowID;
         }
 
-        var tableID = "tblWebSite";
-        var table = document.getElementById(tableID);
-
         var rowCount = table.rows.length;
         var row = table.insertRow(rowCount);
         row.id = dataObj.rowID;
 
-        var cellWebsite = row.insertCell(0);
-        var elementWebSite = document.createElement("input");
-        elementWebSite.setAttribute('data-original-title',
-            dataObj.webSite == '' ? "http://google.com" : dataObj.webSite);
+        var cellEntity = row.insertCell(0);
+        var elementEntity = document.createElement("input");
+        elementEntity.setAttribute('data-original-title', dataObj.entity == '' ? tooltip : dataObj.entity);
 
-        elementWebSite.className = "form-control customToolTip";
-        elementWebSite.placeholder = "URL or IP";
-        elementWebSite.value = dataObj.webSite;
-        cellWebsite.appendChild(elementWebSite);
+        elementEntity.className = "form-control customToolTip";
+        elementEntity.placeholder = placeholder;
+        elementEntity.value = dataObj.entity;
+        cellEntity.appendChild(elementEntity);
 
         var cellEmail = row.insertCell(1);
         var elementEmail = document.createElement("input");
@@ -149,6 +165,7 @@ var UIUtility = function () {
         var elementValImage = document.createElement("img");
         elementValImage.src = dataObj.imageSrc;
         elementValImage.className = "customToolTip";
+        elementValImage.id = "imgStatus";
         elementValImage.setAttribute('data-original-title', dataObj.statusToolTip);
         cellValidation.appendChild(elementValImage);
 
@@ -158,20 +175,20 @@ var UIUtility = function () {
         elementSave.className = "btn btn-info glyphicon glyphicon-ok btn-sm";
         elementSave.addEventListener('click', function () {
 
-            elementWebSite.classList.remove('valFailedBoder');
+            elementEntity.classList.remove('valFailedBoder');
             elementEmail.classList.remove('valFailedBoder');
 
-            var validateWebSite = validationUtility.validateWebsite(elementWebSite.value);
+            var validateEntity = validationUtility.validateEntity(elementEntity.value, type);
             var validateEmail = validationUtility.validateEmail(elementEmail.value);
 
             var errorMessage = '';
 
             var isValid = true;
 
-            if (validateWebSite != '') {
+            if (validateEntity != '') {
                 isValid = false;
-                elementWebSite.classList.add('valFailedBoder');
-                errorMessage = validateWebSite;
+                elementEntity.classList.add('valFailedBoder');
+                errorMessage = validateEntity;
             }
             if (validateEmail != '') {
                 isValid = false;
@@ -179,35 +196,34 @@ var UIUtility = function () {
                 errorMessage = errorMessage != '' ? (errorMessage + ', ' + validateEmail) : validateEmail;
             }
 
-            document.getElementById('lblWebsiteVal').innerHTML = errorMessage;
+            validationLbl.innerHTML = errorMessage;
 
             //TODO Check if this website already exists in the current list
             // Check for multiple scenarions with http://, without http:// etc
             if (isValid) {
 
-                elementWebSite.setAttribute('data-original-title', elementWebSite.value);
+                elementEntity.setAttribute('data-original-title', elementEntity.value);
                 elementEmail.setAttribute('data-original-title', elementEmail.value);
 
                 // adding space after coma(,). This is needed for multilined tooltip
-
                 var updateEmail = elementEmail.value.replace(/,/g, ", ");
 
                 localStorageUtility.addTask(row.id,
-                    config.taskType.webSite, {
-                        'website': elementWebSite.value.toLowerCase(),
+                    type, {
+                        'entity': elementEntity.value.toLowerCase(),
                         'email': updateEmail.toLowerCase()
                     })
 
-                APIUtility.checkWebSiteStatus([row.id], false);
+                APIUtility.checkStatus([row.id], false);
 
-                elementWebSite.classList.remove('valFailedBoder');
+                elementEntity.classList.remove('valFailedBoder');
                 elementEmail.classList.remove('valFailedBoder');
 
-                elementWebSite.disabled = true;
+                elementEntity.disabled = true;
                 elementEmail.disabled = true;
                 elementSave.disabled = true;
 
-                btnAddWebSite.disabled = false;
+                btnAdd.disabled = false;
             }
         });
         cellSave.appendChild(elementSave);
@@ -218,15 +234,14 @@ var UIUtility = function () {
         elementCancel.className = "btn btn-danger glyphicon glyphicon-remove btn-sm";
         elementCancel.addEventListener('click', function () {
 
-            document.getElementById('lblWebsiteVal').innerHTML = '';
+            validationLbl.innerHTML = '';
 
             localStorageUtility.deleteItem(row.id);
 
-            var tblWebSite = document.getElementById('tblWebSite');
-            var lastRow = tblWebSite.rows[tblWebSite.rows.length - 1];
+            var lastRow = table.rows[table.rows.length - 1];
 
             if (lastRow.id == dataObj.rowID) {
-                btnAddWebSite.disabled = false;
+                btnAdd.disabled = false;
             }
 
             $(this).closest('tr').remove();
@@ -237,24 +252,14 @@ var UIUtility = function () {
         if (data != null) {
             elementEmail.disabled = true;
             elementEmail.placeholder = ''
-            elementWebSite.disabled = true;
+            elementEntity.disabled = true;
             elementSave.disabled = true;
         }
-    }
-
-    function addServer(rowID, data) {
-        //TODO
-    }
-
-    function addDB(rowID, data) {
-        //TODO
     }
 
     return {
         updateStatus: updateStatus,
         populateUI: populateUI,
-        addWebsite: addWebsite,
-        addServer: addServer,
-        addDB: addDB
+        addEntity: addEntity
     }
 }();

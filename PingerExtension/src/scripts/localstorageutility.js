@@ -12,8 +12,8 @@ var localStorageUtility = (function () {
             "previousStatus": config.taskStatus.checking,
             "unableToRetrive": false,
             "createdAt": new Date(),
-            "lastRunAt": new Date(),
-            "nextRunAt": new Date(),
+            //"lastRunAt": new Date(),
+            //"nextRunAt": new Date(),
             "sendEmail": false
         }
 

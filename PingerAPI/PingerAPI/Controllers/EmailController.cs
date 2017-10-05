@@ -30,7 +30,7 @@ namespace PingerAPI.Controllers
                         status = StringLiterals.StatusDead;
                     }
 
-                    string subject = string.Format(StringLiterals.EmailSubject, item.Value, status, DateTime.UtcNow.ToString());
+                    string subject = string.Format(StringLiterals.EmailSubject, item.Entity, status, DateTime.UtcNow.ToString());
 
                     Task.Run(() => EmailUtility.SendEmail(item.ToEmail, subject, StringLiterals.EmailBody));
                 }
