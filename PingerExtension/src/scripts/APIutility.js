@@ -35,75 +35,86 @@ var APIUtility = (function () {
 
         var entitiesPerRequest = config.defaultSettings.entitiesPerRequest;
 
+
+        var def = $.Deferred();
+        var requests = [];
+
         for (var i = 0; i < Math.ceil(localStorageList.length / entitiesPerRequest); i++) {
 
             var items = localStorageList.slice(i * entitiesPerRequest, (i * entitiesPerRequest) + entitiesPerRequest);
 
-            $.ajax({
-                method: "POST",
-                url: config.URL.statusURL,
-                dataType: "JSON",
-                contentType: "application/json",
-                data: JSON.stringify(items),
-                success: function (data) {
+            requests.push(
+                $.ajax({
+                    method: "POST",
+                    url: config.URL.statusURL,
+                    dataType: "JSON",
+                    contentType: "application/json",
+                    data: JSON.stringify(items),
+                    success: function (data) {
 
-                    data.forEach(function (item) {
+                        data.forEach(function (item) {
 
-                        var updatedObj = localStorageUtility.retriveItem(item.Key);
-                        updatedObj.sendEmail = false;
+                            var updatedObj = localStorageUtility.retriveItem(item.Key);
+                            updatedObj.sendEmail = false;
 
-                        if (item.PreviousState == config.taskStatus.checking &&
-                            item.UpdatedState == config.taskStatus.dead) {
-                            // This condition executes when the entity is added for the first time and it fails
-                            updatedObj.sendEmail = true;
-                        } else if (item.PreviousState != config.taskStatus.checking &&
-                            item.PreviousState != item.UpdatedState) {
-                            updatedObj.sendEmail = true;
-                        }
+                            if (item.PreviousState == config.taskStatus.checking &&
+                                item.UpdatedState == config.taskStatus.dead) {
+                                // This condition executes when the entity is added for the first time and it fails
+                                updatedObj.sendEmail = true;
+                            } else if (item.PreviousState != config.taskStatus.checking &&
+                                item.PreviousState != item.UpdatedState) {
+                                updatedObj.sendEmail = true;
+                            }
 
-                        updatedObj.status = item.UpdatedState;
-                        updatedObj.previousStatus = item.UpdatedState;
+                            updatedObj.status = item.UpdatedState;
+                            updatedObj.previousStatus = item.UpdatedState;
 
-                        //updatedObj.lastRunAt = new Date();
-                        //var dateTime = new Date(updatedObj.lastRunAt);
-                        //updatedObj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + settingsObj.interval));
+                            //updatedObj.lastRunAt = new Date();
+                            //var dateTime = new Date(updatedObj.lastRunAt);
+                            //updatedObj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + settingsObj.interval));
 
-                        updatedObj.unableToRetrive = false;
+                            updatedObj.unableToRetrive = false;
 
-                        localStorageUtility.updateItem(item.Key, updatedObj);
+                            localStorageUtility.updateItem(item.Key, updatedObj);
 
-                        if (!isBackGroundTask) {
-                            UIUtility.updateStatus(item.Key);
-                        }
-                    });
-                },
-                error: function (data) {
+                            if (!isBackGroundTask) {
+                                UIUtility.updateStatus(item.Key);
+                            }
+                        });
+                    },
+                    error: function (data) {
 
-                    items.forEach(function (item) {
+                        items.forEach(function (item) {
 
-                        var obj = localStorageUtility.retriveItem(item.key);
+                            var obj = localStorageUtility.retriveItem(item.key);
 
-                        // updating status
-                        obj.unableToRetrive = true;
-                        obj.status = obj.previousStatus;
+                            // updating status
+                            obj.unableToRetrive = true;
+                            obj.status = obj.previousStatus;
 
-                        // obj.lastRunAt = new Date();
-                        // var dateTime = new Date(obj.lastRunAt);
-                        // obj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + settingsObj.interval));
+                            // obj.lastRunAt = new Date();
+                            // var dateTime = new Date(obj.lastRunAt);
+                            // obj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + settingsObj.interval));
 
-                        localStorageUtility.updateItem(item.key, obj);
+                            localStorageUtility.updateItem(item.key, obj);
 
-                        // updating UI
-                        // We will not update the UI if it is a background task
-                        if (!isBackGroundTask) {
-                            UIUtility.updateStatus(item.key);
-                        }
+                            // updating UI
+                            // We will not update the UI if it is a background task
+                            if (!isBackGroundTask) {
+                                UIUtility.updateStatus(item.key);
+                            }
 
-                    });
-                }
-            });
+                        });
+                    }
+                }));
+
         }
-        return true;
+
+        $.when.apply($, requests).then(function () {
+            def.resolve();
+        });
+
+        return def.promise();
     }
 
     var sendEmail = function sendEmail(list) {

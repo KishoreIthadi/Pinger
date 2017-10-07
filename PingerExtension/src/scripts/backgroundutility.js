@@ -80,7 +80,6 @@ var backgroundUtility = function () {
     var updateInterval = function () {
         helperUtility.logMessage(new Date() + " Interval Updated ************************", config.messageType.log);
         clearInterval(startProcess);
-        updateSettings();
         startTimer();
     }
 
@@ -89,20 +88,24 @@ var backgroundUtility = function () {
         var settingsObj = localStorageUtility.retriveItem("settings");
         settingsObj.lastRunAt = new Date();
         var dateTime = new Date(settingsObj.lastRunAt);
-        settingsObj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + settingsObj.interval));
-       localStorageUtility.updateItem("settings", settingsObj);
+        settingsObj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + parseInt(settingsObj.interval)));
+        localStorageUtility.updateItem("settings", settingsObj);
     }
 
     return {
         startTimer: startTimer,
         stopTimer: stopTimer,
-        updateInterval: updateInterval
+        updateInterval: updateInterval,
+        updateSettings: updateSettings
     }
 }();
 
 (function () {
 
     backgroundUtility.startTimer();
+
+    // updating the next runtime once plugin starts
+    backgroundUtility.updateSettings();
 
     window.addEventListener('storage', function (e) {
         if (e.key == "settings") {

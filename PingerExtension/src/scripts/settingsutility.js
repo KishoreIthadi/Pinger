@@ -7,12 +7,15 @@ var settingsUtility = function () {
         //TODO validations
         var settingsObj = localStorageUtility.retriveItem("settings");
 
+        var dateTime = new Date();
+        var nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + parseInt(interval)));
+
         var obj = {
             "globalEmail": email,
             "interval": interval,
             "enableNotifications": enableNotifications,
-            "lastRunAt": new Date(settingsObj.lastRunAt),
-            "nextRunAt": new Date(settingsObj.nextRunAt)
+            "lastRunAt": settingsObj.lastRunAt,
+            "nextRunAt": nextRunAt
         }
 
         localStorageUtility.addItem("settings", obj);
