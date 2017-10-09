@@ -111,9 +111,9 @@ var events = function () {
 
         document.getElementById('lblServerVal').innerHTML = '';
 
-        var websiteCount = helperUtility.getEntityCount(config.taskType.server);
-        if (websiteCount >= config.defaultSettings.maxServerCount) {
-            document.getElementById('lblServerVal').innerHTML = 'Maximum of ' + config.defaultSettings.maxWebsiteCount + ' servers are allowed';
+        var serverCount = helperUtility.getEntityCount(config.taskType.server);
+        if (serverCount >= config.defaultSettings.maxServerCount) {
+            document.getElementById('lblServerVal').innerHTML = 'Maximum of ' + config.defaultSettings.maxServerCount + ' servers are allowed';
             return;
         }
 
@@ -124,11 +124,12 @@ var events = function () {
 
         document.getElementById('lblDBVal').innerHTML = '';
 
-        var websiteCount = helperUtility.getEntityCount(config.taskType.database);
-        if (websiteCount >= config.defaultSettings.maxDBCount) {
-            document.getElementById('lblDBVal').innerHTML = 'Maximum of ' + config.defaultSettings.maxWebsiteCount + ' databases are allowed';
+        var DBCount = helperUtility.getEntityCount(config.taskType.database);
+        if (DBCount >= config.defaultSettings.maxDBCount) {
+            document.getElementById('lblDBVal').innerHTML = 'Maximum of ' + config.defaultSettings.maxDBCount + ' databases are allowed';
             return;
         }
+
         UIUtility.addEntity(null, null, config.taskType.database);
     };
 
