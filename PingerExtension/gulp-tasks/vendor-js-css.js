@@ -8,6 +8,7 @@ var replace = require('gulp-string-replace');
 // Vendor jS and CSS *************************************************************************************
 gulp.task('vendor-js', () => {
     return gulp.src([
+            'src/scripts/lib/ga.js',
             'node_modules/jquery/dist/jquery.min.js',
             'node_modules/bootstrap/dist/js/bootstrap.min.js'
         ])

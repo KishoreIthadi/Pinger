@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "PingER",
-  
+
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 
   "description": "Pinger is a Chrome Extension to help you monitor the status of your websites, servers & databases.",
@@ -16,8 +16,10 @@
 
   "background": {
     "scripts": [
+      "scripts/lib/ga.js",
       "scripts/lib/jquery.min.js",
       "scripts/config.js",
+      "scripts/analyticsutility.js",
       "scripts/helperutility.js",
       "scripts/notificationutility.js",
       "scripts/localstorageutility.js",

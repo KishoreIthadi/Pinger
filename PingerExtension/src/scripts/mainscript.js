@@ -2,6 +2,9 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+
+    analyticsUtility.trackPage("pinger.html");
+
     $('body').tooltip({
         selector: '.customToolTip',
         placement: 'top'
@@ -41,6 +44,8 @@ var events = function () {
     }
 
     var btnSaveSettingsClick = function () {
+
+        analyticsUtility.trackEvents("btnSaveSettings");
 
         var lblSaveSettingsVal = document.getElementById('lblSaveSettingsVal');
         lblSaveSettingsVal.classList.add('failure');
@@ -96,6 +101,8 @@ var events = function () {
 
     var btnAddWebSiteClick = function () {
 
+        analyticsUtility.trackEvents("btnAddWebSite");
+
         document.getElementById('lblWebsiteVal').innerHTML = '';
 
         var websiteCount = helperUtility.getEntityCount(config.taskType.webSite);
@@ -108,6 +115,8 @@ var events = function () {
     };
 
     var btnAddServerClick = function () {
+
+        analyticsUtility.trackEvents("btnAddServer");
 
         document.getElementById('lblServerVal').innerHTML = '';
 
@@ -122,6 +131,8 @@ var events = function () {
 
     var btnAddDBClick = function () {
 
+        analyticsUtility.trackEvents("btnAddDB");
+
         document.getElementById('lblDBVal').innerHTML = '';
 
         var DBCount = helperUtility.getEntityCount(config.taskType.database);
@@ -134,12 +145,9 @@ var events = function () {
     };
 
     var btnConfirmResetClick = function () {
-        localStorageUtility.resetLocalStorage();
-        // Reloading the pluging, which will render the UI
-        location.reload();
-    };
 
-    var btnConfirmResetClick = function () {
+        analyticsUtility.trackEvents("btnConfirmReset");
+
         localStorageUtility.resetLocalStorage();
         // Reloading the pluging, which will render the UI
         location.reload();

@@ -12,7 +12,8 @@ var config = (function () {
         maxEmailLength: 5,
         minInterval: 5,
         maxInterval: 180,
-        entitiesPerRequest: 5
+        entitiesPerRequest: 5,
+        analyticCode: ''
     };
 
     var taskStatus = {
