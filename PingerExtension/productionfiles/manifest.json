@@ -21,11 +21,6 @@
     "default_popup": "pinger.html"
   },
 
-  "browser_action": {
-    "default_icon": "images/pingerX32.png",
-    "default_popup": "pinger.html"
-  },
-
   "background": {
     "scripts": [
       "scripts/vendorjs.min.js",
