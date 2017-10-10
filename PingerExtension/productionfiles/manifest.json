@@ -9,6 +9,18 @@
 
   "version": "0.0.0.1",
 
+  "icons": {
+    "16": "images/pingerX16.png",
+    "48": "images/pingerX32.png",
+    "128": "images/pingerX48.png",
+    "128": "images/pingerX128.png"
+  },
+
+  "browser_action": {
+    "default_icon": "images/pingerX32.png",
+    "default_popup": "pinger.html"
+  },
+
   "browser_action": {
     "default_icon": "images/pingerX32.png",
     "default_popup": "pinger.html"
