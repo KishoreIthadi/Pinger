@@ -19,13 +19,13 @@ var backgroundUtility = function () {
     var startProcess = null;
 
     var startTimer = function () {
-        
+
         helperUtility.logMessage(new Date() + " Timer Started ************************", config.messageType.log);
 
         startProcess = setInterval(function () {
 
-            analyticsUtility.trackEvents("timerStarted");
-            
+                analyticsUtility.trackEvents("timerStarted");
+
                 helperUtility.logMessage(new Date() + " BackGround Task Started ************************", config.messageType.log);
 
                 var localStorageKeys = localStorageUtility.retriveAllKeys();

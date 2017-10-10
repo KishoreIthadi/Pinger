@@ -35,7 +35,6 @@ var APIUtility = (function () {
 
         var entitiesPerRequest = config.defaultSettings.entitiesPerRequest;
 
-
         var def = $.Deferred();
         var requests = [];
 
@@ -44,71 +43,71 @@ var APIUtility = (function () {
             var items = localStorageList.slice(i * entitiesPerRequest, (i * entitiesPerRequest) + entitiesPerRequest);
 
             requests.push(
-                (function (items) {
-                    $.ajax({
-                        method: "POST",
-                        url: config.URL.statusURL,
-                        dataType: "JSON",
-                        contentType: "application/json",
-                        data: JSON.stringify(items),
-                        success: function (data) {
 
-                            data.forEach(function (item) {
+                $.ajax({
+                    method: "POST",
+                    url: config.URL.statusURL,
+                    dataType: "JSON",
+                    contentType: "application/json",
+                    data: JSON.stringify(items),
+                    success: function (data) {
 
-                                var updatedObj = localStorageUtility.retriveItem(item.Key);
-                                updatedObj.sendEmail = false;
+                        data.forEach(function (item) {
 
-                                if (item.PreviousState == config.taskStatus.checking &&
-                                    item.UpdatedState == config.taskStatus.dead) {
-                                    // This condition executes when the entity is added for the first time and it fails
-                                    updatedObj.sendEmail = true;
-                                } else if (item.PreviousState != config.taskStatus.checking &&
-                                    item.PreviousState != item.UpdatedState) {
-                                    updatedObj.sendEmail = true;
-                                }
+                            var updatedObj = localStorageUtility.retriveItem(item.Key);
+                            updatedObj.sendEmail = false;
 
-                                updatedObj.status = item.UpdatedState;
-                                updatedObj.previousStatus = item.UpdatedState;
+                            if (item.PreviousState == config.taskStatus.checking &&
+                                item.UpdatedState == config.taskStatus.dead) {
+                                // This condition executes when the entity is added for the first time and it fails
+                                updatedObj.sendEmail = true;
+                            } else if (item.PreviousState != config.taskStatus.checking &&
+                                item.PreviousState != item.UpdatedState) {
+                                updatedObj.sendEmail = true;
+                            }
 
-                                //updatedObj.lastRunAt = new Date();
-                                //var dateTime = new Date(updatedObj.lastRunAt);
-                                //updatedObj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + settingsObj.interval));
+                            updatedObj.status = item.UpdatedState;
+                            updatedObj.previousStatus = item.UpdatedState;
 
-                                updatedObj.unableToRetrive = false;
+                            //updatedObj.lastRunAt = new Date();
+                            //var dateTime = new Date(updatedObj.lastRunAt);
+                            //updatedObj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + settingsObj.interval));
 
-                                localStorageUtility.updateItem(item.Key, updatedObj);
+                            updatedObj.unableToRetrive = false;
 
-                                if (!isBackGroundTask) {
-                                    UIUtility.updateStatus(item.Key);
-                                }
-                            });
-                        },
-                        error: function (data) {
+                            localStorageUtility.updateItem(item.Key, updatedObj);
 
-                            items.forEach(function (item) {
+                            if (!isBackGroundTask) {
+                                UIUtility.updateStatus(item.Key);
+                            }
+                        });
+                    },
+                    error: function (data) {
 
-                                var obj = localStorageUtility.retriveItem(item.key);
+                        items.forEach(function (item) {
 
-                                // updating status
-                                obj.unableToRetrive = true;
-                                obj.status = obj.previousStatus;
+                            var obj = localStorageUtility.retriveItem(item.key);
 
-                                // obj.lastRunAt = new Date();
-                                // var dateTime = new Date(obj.lastRunAt);
-                                // obj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + settingsObj.interval));
+                            // updating status
+                            obj.unableToRetrive = true;
+                            obj.status = obj.previousStatus;
 
-                                localStorageUtility.updateItem(item.key, obj);
+                            // obj.lastRunAt = new Date();
+                            // var dateTime = new Date(obj.lastRunAt);
+                            // obj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + settingsObj.interval));
 
-                                // updating UI
-                                // We will not update the UI if it is a background task
-                                if (!isBackGroundTask) {
-                                    UIUtility.updateStatus(item.key);
-                                }
+                            localStorageUtility.updateItem(item.key, obj);
 
-                            });
-                        }
-                    })
-                })(items));
+                            // updating UI
+                            // We will not update the UI if it is a background task
+                            if (!isBackGroundTask) {
+                                UIUtility.updateStatus(item.key);
+                            }
+
+                        });
+                    }
+                })
+            )
 
         }
 
