@@ -2,6 +2,9 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+
+    analyticsUtility.trackPage("pinger.html");
+
     $('body').tooltip({
         selector: '.customToolTip',
         placement: 'top'
@@ -42,6 +45,8 @@ var events = function () {
 
     var btnSaveSettingsClick = function () {
 
+        analyticsUtility.trackEvents("btnSaveSettings");
+
         var lblSaveSettingsVal = document.getElementById('lblSaveSettingsVal');
         lblSaveSettingsVal.classList.add('failure');
         lblSaveSettingsVal.innerHTML = '';
@@ -77,10 +82,26 @@ var events = function () {
             lblSaveSettingsVal.classList.remove('failure');
             lblSaveSettingsVal.classList.add('success');
             settingsUtility.saveSettings(txtGolbalEmail.value, txtRunInterval.value, cbEnableNotifications.checked);
+
+            var localStorageKeys = localStorageUtility.retriveAllKeys();
+
+            if (localStorageKeys.length > 0) {
+
+                for (var i = 0; i < localStorageKeys.length; i++) {
+
+                    var key = localStorageKeys[i];
+
+                    if (key != 'settings') {
+                        UIUtility.updateStatus(key);
+                    }
+                }
+            }
         }
     };
 
     var btnAddWebSiteClick = function () {
+
+        analyticsUtility.trackEvents("btnAddWebSite");
 
         document.getElementById('lblWebsiteVal').innerHTML = '';
 
@@ -90,24 +111,43 @@ var events = function () {
             return;
         }
 
-        UIUtility.addWebsite();
+        UIUtility.addEntity(null, null, config.taskType.webSite);
     };
 
     var btnAddServerClick = function () {
-        UIUtility.addServer();
+
+        analyticsUtility.trackEvents("btnAddServer");
+
+        document.getElementById('lblServerVal').innerHTML = '';
+
+        var serverCount = helperUtility.getEntityCount(config.taskType.server);
+        if (serverCount >= config.defaultSettings.maxServerCount) {
+            document.getElementById('lblServerVal').innerHTML = 'Maximum of ' + config.defaultSettings.maxServerCount + ' servers are allowed';
+            return;
+        }
+
+        UIUtility.addEntity(null, null, config.taskType.server);
     };
 
     var btnAddDBClick = function () {
-        UIUtility.addDB();
+
+        analyticsUtility.trackEvents("btnAddDB");
+
+        document.getElementById('lblDBVal').innerHTML = '';
+
+        var DBCount = helperUtility.getEntityCount(config.taskType.database);
+        if (DBCount >= config.defaultSettings.maxDBCount) {
+            document.getElementById('lblDBVal').innerHTML = 'Maximum of ' + config.defaultSettings.maxDBCount + ' databases are allowed';
+            return;
+        }
+
+        UIUtility.addEntity(null, null, config.taskType.database);
     };
 
     var btnConfirmResetClick = function () {
-        localStorageUtility.resetLocalStorage();
-        // Reloading the pluging, which will render the UI
-        location.reload();
-    };
 
-    var btnConfirmResetClick = function () {
+        analyticsUtility.trackEvents("btnConfirmReset");
+
         localStorageUtility.resetLocalStorage();
         // Reloading the pluging, which will render the UI
         location.reload();

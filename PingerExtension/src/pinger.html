@@ -16,7 +16,8 @@
         <div class="header">
             <img alt="Pinger" class="headerlogo" src="images/pingerX32.png">
             <span>INGER</span>
-            <a href="https://github.com/KishoreIthadi/Pinger/blob/master/README.md" target="_blank" class="pull-right padding5-top">                
+            <a href="https://github.com/KishoreIthadi/Pinger/blob/master/README.md" target="_blank" class="pull-right padding5-top customToolTip"
+                data-original-title="More Info">                
                     <span class="glyphicon glyphicon-info-sign"></span>
             </a>
         </div>
@@ -25,13 +26,13 @@
         <div>
             <div class="tabpanel">
                 <ul class="nav nav-default nav-tabs text-center">
-                    <li class="active"><a data-toggle="tab" href="#tabwebsite">Website</a></li>
-                    <li><a data-toggle="tab" href="#tabserver">Server/Remote Desktop</a></li>
-                    <li><a data-toggle="tab" href="#tabDB">Database</a></li>
+                    <li class="active"><a data-toggle="tab" href="#tabWebsite">Website</a></li>
+                    <li><a data-toggle="tab" href="#tabServer">Remote Server</a></li>
+                    <li><a data-toggle="tab" href="#tabDB">Remote DB</a></li>
                     <li><a data-toggle="tab" href="#tabSettings" id="settingsTab">Settings</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div class="active tab-pane fade in overflowAuto" id="tabwebsite">
+                    <div class="active tab-pane fade in overflowAuto" id="tabWebsite">
                         <table id="tblWebSite" class="table">
                         </table>
                         <label id="lblWebsiteVal" class="mar10-left failure"></label>
@@ -39,18 +40,18 @@
                             <span class="glyphicon glyphicon-plus"></span> Add 
                         </button>
                     </div>
-                    <div class="tab-pane fade overflowAuto" id="tabserver">
-                        <p class="mar5">In Development</p>
+                    <div class="tab-pane fade overflowAuto" id="tabServer">
                         <table id="tblServer" class="table">
                         </table>
+                        <label id="lblServerVal" class="mar10-left failure"></label>
                         <button type="button" class="btn btn-sm btn-success mar10-right pull-right" id="btnAddServer">
                                 <span class="glyphicon glyphicon-plus"></span> Add 
                         </button>
                     </div>
                     <div class="fade tab-pane overflowAuto" id="tabDB">
-                        <p class="mar5">In Development</p>
                         <table class="borderless table table-sm" id="tblDB">
                         </table>
+                        <label id="lblDBVal" class="mar10-left failure"></label>
                         <button type="button" class="btn btn-sm btn-success mar10-right pull-right" id="btnAddDB">
                                 <span class="glyphicon glyphicon-plus"></span> Add 
                         </button>
@@ -101,10 +102,12 @@
     </div>
 </body>
 
+<script async src="scripts/lib/ga.js"></script>
 <script src="scripts/lib/jquery.min.js"></script>
 <script src="scripts/lib/bootstrap.min.js"></script>
 
 <script src="scripts/config.js"></script>
+<script src="scripts/analyticsutility.js"></script>
 <script src="scripts/helperutility.js"></script>
 <script src="scripts/notificationutility.js"></script>
 <script src="scripts/localstorageutility.js"></script>

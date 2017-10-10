@@ -5,11 +5,17 @@ var settingsUtility = function () {
     var saveSettings = function (email, interval, enableNotifications) {
 
         //TODO validations
+        var settingsObj = localStorageUtility.retriveItem("settings");
+
+        var dateTime = new Date();
+        var nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + parseInt(interval)));
 
         var obj = {
-            "interval": interval,
             "globalEmail": email,
-            "enableNotifications": enableNotifications
+            "interval": interval,
+            "enableNotifications": enableNotifications,
+            "lastRunAt": settingsObj.lastRunAt,
+            "nextRunAt": nextRunAt
         }
 
         localStorageUtility.addItem("settings", obj);
@@ -21,10 +27,15 @@ var settingsUtility = function () {
     var loadDefaultSettings = function () {
         if (localStorageUtility.retriveItem("settings") == null) {
 
+            var dateTime = new Date();
+            var nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + config.defaultSettings.defaultInterval));
+
             var obj = {
                 "globalEmail": "",
                 "interval": config.defaultSettings.defaultInterval,
-                "enableNotifications": config.defaultSettings.enableNotifications
+                "enableNotifications": config.defaultSettings.enableNotifications,
+                "lastRunAt": new Date(),
+                "nextRunAt": nextRunAt
             }
 
             localStorageUtility.addItem("settings", obj);

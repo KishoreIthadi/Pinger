@@ -1,7 +1,9 @@
 ﻿using DomainModel.DTO;
 using DomainModel.Enum;
+using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -20,10 +22,10 @@ namespace PingerAPI.Controllers
                         await CheckWebsiteStatus(item);
                         break;
                     case (int)TaskTypeEnum.Server:
-                        await CheckServerStatus(item);
+                        await CheckServerNDBStatus(item);
                         break;
                     case (int)TaskTypeEnum.Database:
-                        await CheckDBStatus(item);
+                        await CheckServerNDBStatus(item);
                         break;
                     default:
                         break;
@@ -37,8 +39,8 @@ namespace PingerAPI.Controllers
         {
             try
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create((obj.Value.IndexOf("://") == -1) ?
-                              "http://" + obj.Value : obj.Value);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create((obj.Entity.IndexOf("://") == -1) ?
+                              "http://" + obj.Entity : obj.Entity);
 
                 using (HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync())
                 {
@@ -65,15 +67,31 @@ namespace PingerAPI.Controllers
             return true;
         }
 
-        private async Task<bool> CheckServerStatus(TaskDTO obj)
+        private async Task<bool> CheckServerNDBStatus(TaskDTO obj)
         {
-            //TODO
-            return true;
-        }
+            try
+            {
+                string[] list = obj.Entity.Split(':');
 
-        private async Task<bool> CheckDBStatus(TaskDTO obj)
-        {
-            //TODO
+                TcpClient client = new TcpClient();
+                await client.ConnectAsync(list[0], Convert.ToInt32(list[1]));
+
+                if (obj.PreviousState != (int)TaskStatusEnum.Alive)
+                {
+                    obj.UpdatedState = (int)TaskStatusEnum.Alive;
+                }
+
+                return true;
+            }
+            catch
+            {
+            }
+
+            if (obj.PreviousState != (int)TaskStatusEnum.Dead)
+            {
+                obj.UpdatedState = (int)TaskStatusEnum.Dead;
+            }
+
             return true;
         }
     }

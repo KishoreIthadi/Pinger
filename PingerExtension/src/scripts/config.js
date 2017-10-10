@@ -6,11 +6,14 @@ var config = (function () {
         defaultInterval: 5,
         enableNotifications: true,
         notificationInterval: 5,
-        maxWebsiteCount: 5,
+        maxWebsiteCount: 10,
+        maxServerCount: 10,
+        maxDBCount: 10,
         maxEmailLength: 5,
         minInterval: 5,
         maxInterval: 180,
-        entitiesPerRequest: 5
+        entitiesPerRequest: 5,
+        analyticCode: ''
     };
 
     var taskStatus = {
@@ -37,9 +40,7 @@ var config = (function () {
 
     var URL = {
         baseURL: baseURL,
-        websiteURL: baseURL + "/Task/CheckTaskStatus",
-        DBURL: baseURL + "",
-        ServerURL: baseURL + "",
+        statusURL: baseURL + "/Task/CheckTaskStatus",
         emailURL: baseURL + "/Email/SendEmail"
     };
 

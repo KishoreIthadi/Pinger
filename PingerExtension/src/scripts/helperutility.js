@@ -41,16 +41,8 @@ var helperUtility = (function () {
                 if (key != "settings") {
                     var obj = localStorageUtility.retriveItem(key);
 
-                    switch (taskType) {
-                        case config.taskType.webSite:
-                            count++;
-                            break;
-                        case config.taskType.server:
-                            count++;
-                            break;
-                        case config.taskType.database:
-                            count++;
-                            break;
+                    if (obj.taskType == taskType) {
+                        count++;
                     }
                 }
             }

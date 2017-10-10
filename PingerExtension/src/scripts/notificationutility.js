@@ -57,20 +57,22 @@ var notificationUtility = function () {
                 if (obj.sendEmail) {
 
                     if (obj.status == config.taskStatus.alive) {
-                        notificationUtility.notifyUser(obj.value.website + " is up and running", 1);
+                        notificationUtility.notifyUser(obj.value.entity + " is up and running", 1);
                     }
                     if (obj.status == config.taskStatus.dead) {
-                        notificationUtility.notifyUser(obj.value.website + " went down", 2);
+                        notificationUtility.notifyUser(obj.value.entity + " went down", 2);
                     }
 
-                    localStorageList.push({
-                        "taskType": obj.taskType,
-                        'value': obj.value.website,
-                        'previousState': obj.status,
-                        'updatedState': obj.status,
-                        'toEmail': obj.value.email,
-                        'key': key
-                    });
+                    if (obj.toEmail != '') {
+                        localStorageList.push({
+                            "taskType": obj.taskType,
+                            'entity': obj.value.entity,
+                            'previousState': obj.status,
+                            'updatedState': obj.status,
+                            'toEmail': obj.value.email,
+                            'key': key
+                        });
+                    }
                 }
             }
 

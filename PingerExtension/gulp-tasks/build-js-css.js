@@ -8,6 +8,7 @@ var cssMinify = require('gulp-cssnano');
 gulp.task('common-js', () => {
     return gulp.src([
             "src/scripts/config.js",
+            "src/scripts/analyticsutility.js",
             "src/scripts/notificationutility.js",
             "src/scripts/localstorageutility.js",
             "src/scripts/settingsutility.js",

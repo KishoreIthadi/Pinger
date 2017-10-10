@@ -24,6 +24,8 @@ var backgroundUtility = function () {
 
         startProcess = setInterval(function () {
 
+                analyticsUtility.trackEvents("timerStarted");
+
                 helperUtility.logMessage(new Date() + " BackGround Task Started ************************", config.messageType.log);
 
                 var localStorageKeys = localStorageUtility.retriveAllKeys();
@@ -56,9 +58,9 @@ var backgroundUtility = function () {
 
                     Promise
                         .all([
-                            APIUtility.checkWebSiteStatus(websiteList, true),
-                            APIUtility.checkDatabaseStatus(DBList, true),
-                            APIUtility.checkServerStatus(serverList, true)
+                            APIUtility.checkStatus(websiteList, true),
+                            APIUtility.checkStatus(DBList, true),
+                            APIUtility.checkStatus(serverList, true)
                         ]).then(function (values) {
                             notificationUtility.checkPendingNotifications();
                             updateSettings();
@@ -88,20 +90,24 @@ var backgroundUtility = function () {
         var settingsObj = localStorageUtility.retriveItem("settings");
         settingsObj.lastRunAt = new Date();
         var dateTime = new Date(settingsObj.lastRunAt);
-        settingsObj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + settingsObj.interval));
+        settingsObj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + parseInt(settingsObj.interval)));
         localStorageUtility.updateItem("settings", settingsObj);
     }
 
     return {
         startTimer: startTimer,
         stopTimer: stopTimer,
-        updateInterval: updateInterval
+        updateInterval: updateInterval,
+        updateSettings: updateSettings
     }
 }();
 
 (function () {
 
     backgroundUtility.startTimer();
+
+    // updating the next runtime once plugin starts
+    backgroundUtility.updateSettings();
 
     window.addEventListener('storage', function (e) {
         if (e.key == "settings") {
