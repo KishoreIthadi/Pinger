@@ -1,7 +1,7 @@
 {
   "name": "pingerextension",
   "version": "1.0.0",
-  "description": "Pinger is a simple but elegant chrome browser extension to monitor the status of a remote server, website or a remoteDB from your chrome browser.",
+  "description": " Pinger is a simple but elegant chrome browser extension to monitor the status of a remote server, website or a remoteDB from your chrome browser.",
   "scripts": {
     "build-prod": "gulp build-prod"
   },
