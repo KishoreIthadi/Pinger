@@ -5,7 +5,7 @@
 
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 
-  "description": "Pinger is a Chrome Extension to help you monitor the status of your websites, servers & databases.",
+  "description": " Pinger is a simple but elegant chrome browser extension to monitor the status of a remote server, website or a remoteDB from your chrome browser.",
 
   "version": "0.0.0.1",
 
