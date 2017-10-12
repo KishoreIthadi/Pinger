@@ -179,7 +179,7 @@ You can install the **Pinger** from chrome WebStore or using the developer mode 
 
 ## Contribute                                         
 Contributions are always welcome!
-Please read the contribution guidelines [here](contributing.md).
+Please read the contribution guidelines [here](contribution.md).
 
 ---
 
