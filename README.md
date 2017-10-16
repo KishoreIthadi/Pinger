@@ -2,20 +2,6 @@
   <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/PingerHeadFile.png"/>
 </p>
 
-<p float="left">
-  <kbd>
-    <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/Websitereadme.PNG" width="280" />
-  </kbd>
-  
-  <kbd>
-    <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/SettingsReadme_size.PNG" width="280" /> 
-  </kbd>
-  
-  <kbd>
-    <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/remotedbreadme.PNG" width="280" />
-  </kbd>
-</p>
-
 ---
 
 
@@ -104,14 +90,6 @@ You can install the **Pinger** from chrome WebStore or using the developer mode 
     - **Example**:
     >- **Entity: `https://google.com` (Note: default protocol is `http` and default portnumber is `8080`)**
 
-    **Checkout the following gif to see the functionality graphically.**
-    
-<p align="center">
-  <kbd>
-    <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/gifs/website_gif.gif"/>
-  </kbd>
-</p>
-
 ---
 
 #### Server
@@ -122,14 +100,6 @@ You can install the **Pinger** from chrome WebStore or using the developer mode 
     - **Example**:
     >- **Entity: `10.211.0.118:62949` (Note: default portnumber for Windows server is  `3389` and for Linux, it is `22`)**
     - The extension polls the entity for every `5` min by default. (**how to [change](#settings) the polling interval**).
-    
-    **Checkout the following gif to see the functionality graphically.**
-
-<p align="center">
-  <kbd>
-    <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/gifs/remote_server_gif.gif"/>
-  </kbd>
-</p>
 
 ---
 
@@ -141,14 +111,6 @@ You can install the **Pinger** from chrome WebStore or using the developer mode 
     - **Example**:
     >- **Entity: `192.168.1.96:1433` (Note: default portnumber for Sql server is  `1433` and for Oracle, it is `1521`)**
     - The extension polls the entity for every `5` min by default. (**how to [change](#settings) the polling interval?**).
-    
-    **Checkout the following gif to see the functionality graphically.**
-
-<p align="center">
-  <kbd>
-    <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/gifs/remote_db_gif.gif"/>
-  </kbd>
-</p>
 
 ---
 
@@ -166,14 +128,6 @@ You can install the **Pinger** from chrome WebStore or using the developer mode 
         - **Enable Desktop Notifications** checkbox is used to  enable/disable desktop notifications.
         
         - **Reset Pinger Plugin** Button is used to reset the plugin. **(Note: you may loose all the data entered )**
-        
-        **Checkout the following gif to see the functionality graphically.**
-
-<p align="center">
-  <kbd>
-    <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/gifs/settings_gif.gif"/>
-  </kbd>
-</p>
 
 ---
 

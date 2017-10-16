@@ -48,7 +48,3 @@ Thank you for your suggestions!
 
 ## Thank You
 > Thank you for your contributions to Pinger.
-
-- **Contributors**
-    - ![](https:////github.com/Kishoreithadi.png?size=20) [**Kishore Ithadi**](https://github.com/KishoreIthadi)
-    
