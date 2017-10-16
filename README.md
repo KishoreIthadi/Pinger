@@ -50,25 +50,25 @@
         <td>
           <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/loader.gif"/>
         </td>
-        <td>**Waiting for the response**</td>
+        <td><b>Waiting for the response</b></td>
       </tr>
       <tr>
         <td>
           <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/failed.png"/>
         </td>
-        <td>**Entity is down and polling is done periodically**</td>
+        <td><b>Entity is down and polling is done periodically</b></td>
       </tr>
       <tr>
         <td>
           <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/succeeded.png"/>
         </td>
-        <td>**Entity is Up and polling is done periodically**</td>
+        <td><b>Entity is Up and polling is done periodically</b></td>
       </tr> 
       <tr>
         <td>
           <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/UnableToRetrive.jpg"/>
         </td>
-        <td>**Pinger Extension couldn't reach the Pinger API(Check your Internet connection)**</td>
+        <td><b>Pinger Extension couldn't reach the Pinger API(Check your Internet connection)></b></td>
       </tr>
     </table>
     
