@@ -15,8 +15,8 @@
     * [Check the status of a Server](#server)
     * [Check the status of a RemoteDB](#remotedb)
     * [Customize Pinger by updating the settings](#settings)
-* [Contribute](CONTRIBUTION.md)
-* [License](License)
+* [Contribute](#contribute)
+* [License](#license)
 
 ---
 
@@ -26,7 +26,7 @@
 ---
 
 ### **Features**
-- Pinger let's you check the status and be notified about the status of any remote server, desktop, website or a remoteDB.
+- Pinger let's you check the status and be notified about the status of any remote server, website or a remoteDB.
 
 - Pinger notifies you on chrome by push notification as well as via email.
 
@@ -34,6 +34,7 @@
 
 - **Note**:
     >- **Pinger will run a chrome background process even if you shut the chrome. You can notice the same in the notification tray in the taskbar.**
+    <img align = "center"  src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/Pinger_Win_BG_Processes.PNG">
     >- **Ensure that you never refer an entity by `localhost` instead give your `IP Address`.**
 
 #### **Status Icons**
@@ -62,7 +63,7 @@
         <td>
           <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/UnableToRetrive.jpg"/>
         </td>
-        <td>The Pinger Api couldn't reach the entity and polls periodically</td>
+        <td>Pinger Extension couldn't reach the Pinger API(Check your Internet connection)</td>
       </tr>
     </table>
     
@@ -84,7 +85,7 @@ You can install the **Pinger** from chrome WebStore or using the developer mode 
 - **Adding a `Website` to monitor the status**
     - Click on the Pinger Icon in the chrome menu to use the extension.
     - By default the `Website` tab is selected.
-    - Click on the `Add` Button to add the URL and Email to notify in the respective fields.
+    - Click on the `Add` Button to add the Entity and Email to notify in the respective fields.
     - - The extension polls the entity for every `5` min by default. (**how to [change](#settings) the polling interval**).
     
     - **Example**:
@@ -107,7 +108,7 @@ You can install the **Pinger** from chrome WebStore or using the developer mode 
 - **Adding a `Remote DataBase` to monitor the status**
     - Click on the Pinger Icon in the chrome menu to use the extension.
     - By default the `Website` tab is selected, so head to the `Remote DB` tab.
-    - Click on the `Add` Button to add the URL with the Portnumber and Email to notify.(Tooltips helps you with the default Port numbers)
+    - Click on the `Add` Button to add the Entity with the Portnumber and Email to notify.(Tooltips helps you with the default Port numbers)
     - **Example**:
     >- **Entity: `192.168.1.96:1433` (Note: default portnumber for Sql server is  `1433` and for Oracle, it is `1521`)**
     - The extension polls the entity for every `5` min by default. (**how to [change](#settings) the polling interval?**).
@@ -119,11 +120,11 @@ You can install the **Pinger** from chrome WebStore or using the developer mode 
     - Click on the Pinger Icon in the chrome menu to use the extension.
     - By default the `Website` tab is selected, so head to the `Settings` tab.
     - Add Global Email Address
-        - **Global Email address** is used as a default notifying emailID for all the entities across all the tabs. **(NOTE: This field accepts any number of values separated by comma `,`)**
+        - **Global Email address** is used as a default notifying emailID for all the entities across all the tabs. **(NOTE: This field accepts any number of values separated by comma `,` and not more than `5` values)**
         - Fill in with the emailID in that respective field.
         
         - **Run Interval In Minutes** field is used as time interval to poll the servers.
-        - Use the navigation button to increase/decrease *(or)* Fill in with custom number of minutes. By default it is `5` mins and the number **cannot be less than `5`**.
+        - Use the navigation button to increase/decrease *(or)* Fill in with custom number of minutes. By default it is `5` mins and the number **cannot be less than `5` and more than `180`**.
         
         - **Enable Desktop Notifications** checkbox is used to  enable/disable desktop notifications.
         

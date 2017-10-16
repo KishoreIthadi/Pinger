@@ -37,14 +37,15 @@ We welcome all contributions, especially by those who used Pinger and noticed so
 ## Pull Requests
 
 - **Ensure your pull request adheres to the following guidelines:**
-    - You spellchecked your text
-    - The title of the link is descriptive but short
-    - If necessary, you have added a short description after the link, ending with a period.
-    - You added some motivation about why this link is useful to beginners into the pull request
+    - Submit the PR to the `develop` branch not the `master` branch. 
+    - You spellchecked your text.
+    - The title of the PR is descriptive but short.
+    - Give the details of the issue your PR addresses.
+    - Keep an eye on the PR for further discussion.
 
 Thank you for your suggestions!
 
 ---
 
 ## Thank You
-> Thank you for your contributions to Pinger.
+> **Thank you for your contributions to Pinger.**
