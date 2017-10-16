@@ -34,12 +34,14 @@
 
 - **Note**:
     >- **Pinger will run a chrome background process even if you shut the chrome. You can notice the same in the notification tray in the taskbar.**
+    <kbd>
     <p align = "center">
     <img   src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/Pinger_Win_BG_Process_2.png">
     </p>
     <p align = "center">
     <img   src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/Pinger_Win_BG_Processes.PNG">
     </p>
+    </kbd>
     
     >- **Pinger works for only publicly exposed entities, if you want it to work for local entities host your own API which you can find in `PingerAPI` directory.**
     >- **Ensure that you never refer an entity by `localhost` instead give your `IP Address`.**
