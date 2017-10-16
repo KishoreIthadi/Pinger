@@ -34,7 +34,10 @@
 
 - **Note**:
     >- **Pinger will run a chrome background process even if you shut the chrome. You can notice the same in the notification tray in the taskbar.**
-    <img align = "center"  src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/Pinger_Win_BG_Processes.PNG">
+    <p align = "center">
+    <img   src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/Pinger_Win_BG_Processes.PNG">
+    </p>
+    
     >- **Ensure that you never refer an entity by `localhost` instead give your `IP Address`.**
 
 #### **Status Icons**
