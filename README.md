@@ -35,6 +35,9 @@
 - **Note**:
     >- **Pinger will run a chrome background process even if you shut the chrome. You can notice the same in the notification tray in the taskbar.**
     <p align = "center">
+    <img   src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/Pinger_Win_BG_Process_2.PNG">
+    </p>
+    <p align = "center">
     <img   src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/Pinger_Win_BG_Processes.PNG">
     </p>
     
@@ -68,7 +71,7 @@
         <td>
           <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/UnableToRetrive.jpg"/>
         </td>
-        <td><b>Pinger Extension couldn't reach the Pinger API(Check your Internet connection)></b></td>
+        <td><b>Pinger Extension couldn't reach the Pinger API(Check your Internet connection)</b></td>
       </tr>
     </table>
     
