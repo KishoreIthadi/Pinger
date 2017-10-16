@@ -40,7 +40,7 @@
     
     >- **Pinger works for only publicly exposed entities, if you want it to work for local entities host your own API which you can find in `PingerAPI` directory.**
     >- **Ensure that you never refer an entity by `localhost` instead give your `IP Address`.**
-    >- **if you clear the history of your chrome browser pinger will ger reset, you will loose all your data existing in the pinger extension.**
+    >- **if you clear the history of your chrome browser pinger will get reset, you will loose all your data existing in the pinger extension.**
 
 #### **Status Icons**
 - The following table consists of the status icons and what exactly they depict.
@@ -50,25 +50,25 @@
         <td>
           <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/loader.gif"/>
         </td>
-        <td>Waiting for the response</td>
+        <td>**Waiting for the response**</td>
       </tr>
       <tr>
         <td>
           <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/failed.png"/>
         </td>
-        <td>Entity is down and polling is done periodically</td>
+        <td>**Entity is down and polling is done periodically**</td>
       </tr>
       <tr>
         <td>
           <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/succeeded.png"/>
         </td>
-        <td>Entity is Up and polling is done periodically</td>
+        <td>**Entity is Up and polling is done periodically**</td>
       </tr> 
       <tr>
         <td>
           <img src="https://raw.githubusercontent.com/ShekharReddy4/Pinger/develop/PingerExtension/src/images/UnableToRetrive.jpg"/>
         </td>
-        <td>Pinger Extension couldn't reach the Pinger API(Check your Internet connection)</td>
+        <td>**Pinger Extension couldn't reach the Pinger API(Check your Internet connection)**</td>
       </tr>
     </table>
     
