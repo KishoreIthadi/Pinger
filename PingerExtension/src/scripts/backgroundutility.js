@@ -92,6 +92,7 @@ var backgroundUtility = function () {
         var dateTime = new Date(settingsObj.lastRunAt);
         settingsObj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + parseInt(settingsObj.interval)));
         localStorageUtility.updateItem("settings", settingsObj);
+        updateInterval();
     }
 
     return {
