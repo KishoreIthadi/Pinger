@@ -97,7 +97,7 @@ var events = function () {
                 }
             }
         }
-    };
+    }; 
 
     var btnAddWebSiteClick = function () {
 
