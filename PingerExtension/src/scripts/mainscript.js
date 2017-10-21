@@ -164,10 +164,7 @@ var events = function () {
             if (JSON.parse(e.oldValue).nextRunAt != JSON.parse(e.newValue).nextRunAt) {
 
                 var localStorageKeys = localStorageUtility.retriveAllKeys();
-                var websiteList = [];
-                var serverList = [];
-                var DBList = [];
-
+               
                 if (localStorageKeys.length > 0) {
 
                     for (var i = 0; i < localStorageKeys.length; i++) {
