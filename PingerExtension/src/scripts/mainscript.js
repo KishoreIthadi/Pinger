@@ -154,9 +154,31 @@ var events = function () {
     };
 
     var storageChanged = function (e) {
+
         if (e.key != "settings") {
             var obj = localStorageUtility.retriveItem(e.key);
             UIUtility.updateStatus(e.key);
+        }
+
+        if (e.key == "settings") {
+
+            if (JSON.parse(e.oldValue).nextRunAt != JSON.parse(e.newValue).nextRunAt) {
+
+                var localStorageKeys = localStorageUtility.retriveAllKeys();
+               
+                if (localStorageKeys.length > 0) {
+
+                    for (var i = 0; i < localStorageKeys.length; i++) {
+
+                        var key = localStorageKeys[i];
+
+                        if (key != "settings") {
+                            UIUtility.updateStatus(key);
+                        }
+                    }
+                }
+
+            }
         }
     };
 
