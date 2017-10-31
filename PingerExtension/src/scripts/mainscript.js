@@ -154,6 +154,7 @@ var events = function () {
     };
 
     var storageChanged = function (e) {
+
         if (e.key != "settings") {
             var obj = localStorageUtility.retriveItem(e.key);
             UIUtility.updateStatus(e.key);

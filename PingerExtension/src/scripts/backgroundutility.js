@@ -61,7 +61,7 @@ var backgroundUtility = function () {
                             APIUtility.checkStatus(websiteList, true),
                             APIUtility.checkStatus(DBList, true),
                             APIUtility.checkStatus(serverList, true)
-                        ]).then(function (values) {
+                        ]).then(function () {
                             notificationUtility.checkPendingNotifications();
                             updateSettings();
                         }).catch(function (error) {
