@@ -36,8 +36,7 @@ var config = (function () {
         info: 3
     };
 
-    //var baseURL = "http://104.198.147.123/api";
-    var baseURL = "http://localhost:62949/api";
+    var baseURL = "http://35.225.102.180/api";
     
     var URL = {
         baseURL: baseURL,

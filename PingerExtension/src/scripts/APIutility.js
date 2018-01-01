@@ -40,16 +40,17 @@ var APIUtility = (function () {
 
         for (var i = 0; i < Math.ceil(localStorageList.length / entitiesPerRequest); i++) {
 
-            let items = localStorageList.slice(i * entitiesPerRequest, (i * entitiesPerRequest) + entitiesPerRequest);
+            var items = localStorageList.slice(i * entitiesPerRequest, (i * entitiesPerRequest) + entitiesPerRequest);
 
             requests.push(
 
-                    $.ajax({
+                (function (list) {
+                    return $.ajax({
                         method: "POST",
                         url: config.URL.statusURL,
                         dataType: "JSON",
                         contentType: "application/json",
-                        data: JSON.stringify(items),
+                        data: JSON.stringify(list),
                         success: function (data) {
 
                             data.forEach(function (item) {
@@ -80,7 +81,7 @@ var APIUtility = (function () {
                         },
                         error: function (data) {
 
-                            items.forEach(function (item) {
+                            list.forEach(function (item) {
 
                                 var obj = localStorageUtility.retriveItem(item.key);
 
@@ -95,17 +96,17 @@ var APIUtility = (function () {
                                 if (!isBackGroundTask) {
                                     UIUtility.updateStatus(item.key);
                                 }
-
                             });
 
                         }
                     })
+                })(items)
             )
         }
 
         $.when.apply($, requests).then(function () {
             def.resolve();
-        }).catch(function(error){
+        }).catch(function (error) {
             def.reject(error);
         });
 
