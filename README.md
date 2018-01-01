@@ -80,7 +80,7 @@
 You can install the **Pinger** from chrome WebStore or using the developer mode option on chrome settings.
 
 #### Chrome Web store
-[![get from chrome web store](/MD-Resources/available_on_chrome_web_store.png)](https://chrome.google.com/webstore/category/extensions)
+[![get from chrome web store](/MD-Resources/available_on_chrome_web_store.png)](https://chrome.google.com/webstore/detail/pinger/jcoegkmjenfpgmkoeomahaioddaajfdk)
 
 ---
 
