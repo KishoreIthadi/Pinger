@@ -50,7 +50,6 @@ var UIUtility = function () {
                 var obj = localStorageUtility.retriveItem(key);
 
                 if (key == "settings") {
-
                     document.getElementById('txtGolbalEmail').value = obj.globalEmail;
                     document.getElementById('txtRunInterval').value = obj.interval
                     document.getElementById('cbEnableNotifications').checked = obj.enableNotifications;
@@ -105,9 +104,9 @@ var UIUtility = function () {
             "entity": '',
             "email": settings != null ? settings.globalEmail : '',
             "imageSrc": '',
-            rowID: '',
-            unableToRetrive: data == null ? false : data.unableToRetrive,
-            statusToolTip: ''
+            "rowID": '',
+            "unableToRetrive": data == null ? false : data.unableToRetrive,
+            "statusToolTip": ''
         }
 
         if (data != null) {
@@ -163,7 +162,9 @@ var UIUtility = function () {
 
         var cellValidation = row.insertCell(2);
         var elementValImage = document.createElement("img");
-        elementValImage.src = dataObj.imageSrc;
+        if(dataObj.imageSrc!=''){
+            elementValImage.src = dataObj.imageSrc;
+        }
         elementValImage.className = "customToolTip";
         elementValImage.id = "imgStatus";
         elementValImage.setAttribute('data-original-title', dataObj.statusToolTip);
