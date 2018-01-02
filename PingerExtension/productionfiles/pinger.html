@@ -15,10 +15,9 @@
         <div class="header">
             <img alt="Pinger" class="headerlogo" src="images/pingerX32.png">
             <span>INGER</span>
-            <a href="https://github.com/KishoreIthadi/Pinger/blob/master/README.md" 
-               target="_blank" class="pull-right padding5-top customToolTip"
-                data-original-title="More Info">                
-                    <span class="glyphicon glyphicon-info-sign"></span>
+            <a href="https://github.com/KishoreIthadi/Pinger/blob/master/README.md" target="_blank" class="pull-right padding5-top customToolTip"
+                data-original-title="More Info">
+                <span class="glyphicon glyphicon-info-sign"></span>
             </a>
         </div>
         <hr>
@@ -26,10 +25,18 @@
         <div>
             <div class="tabpanel">
                 <ul class="nav nav-default nav-tabs text-center">
-                    <li class="active"><a data-toggle="tab" href="#tabWebsite">Website</a></li>
-                    <li><a data-toggle="tab" href="#tabServer">Remote Server</a></li>
-                    <li><a data-toggle="tab" href="#tabDB">Remote DB</a></li>
-                    <li><a data-toggle="tab" href="#tabSettings" id="settingsTab">Settings</a></li>
+                    <li class="active">
+                        <a data-toggle="tab" href="#tabWebsite">Website</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#tabServer">Remote Server</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#tabDB">Remote DB</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#tabSettings" id="settingsTab">Settings</a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane fade in overflowAuto" id="tabWebsite">
@@ -37,7 +44,7 @@
                         </table>
                         <label id="lblWebsiteVal" class="mar10-left failure"></label>
                         <button type="button" class="btn btn-sm btn-success mar10-right pull-right" id="btnAddWebSite">
-                            <span class="glyphicon glyphicon-plus"></span> Add 
+                            <span class="glyphicon glyphicon-plus"></span> Add
                         </button>
                     </div>
                     <div class="tab-pane fade overflowAuto" id="tabServer">
@@ -45,7 +52,7 @@
                         </table>
                         <label id="lblServerVal" class="mar10-left failure"></label>
                         <button type="button" class="btn btn-sm btn-success mar10-right pull-right" id="btnAddServer">
-                                <span class="glyphicon glyphicon-plus"></span> Add 
+                            <span class="glyphicon glyphicon-plus"></span> Add
                         </button>
                     </div>
                     <div class="fade tab-pane overflowAuto" id="tabDB">
@@ -53,7 +60,7 @@
                         </table>
                         <label id="lblDBVal" class="mar10-left failure"></label>
                         <button type="button" class="btn btn-sm btn-success mar10-right pull-right" id="btnAddDB">
-                                <span class="glyphicon glyphicon-plus"></span> Add 
+                            <span class="glyphicon glyphicon-plus"></span> Add
                         </button>
                     </div>
                     <div class="fade tab-pane overflowAuto" id="tabSettings">
@@ -67,13 +74,15 @@
                                 <input type="number" class="form-control" id="txtRunInterval" min="5" max="180">
                             </div>
                             <div class="checkbox">
-                                <label><input type="checkbox" id="cbEnableNotifications">Enable Desktop Notifications</label>
+                                <label>
+                                    <input type="checkbox" id="cbEnableNotifications">Enable Desktop Notifications</label>
                             </div>
                             <button type="submit" class="btn btn-success" id="btnSaveSettings">Save</button>
                             <label id="lblSaveSettingsVal" class="success"></label>
-                            <br><br>
+                            <br>
+                            <br>
                             <hr>
-                            <button type="submit" class="btn btn-block btn-danger" id="btnResetPlugin" data-toggle="modal" data-target="#resetModal">Rest Pinger Plugin</button>
+                            <button type="submit" class="btn btn-block btn-danger" id="btnResetPlugin" data-toggle="modal" data-target="#resetModal">Reset Pinger Plugin</button>
                         </div>
                     </div>
                 </div>
@@ -101,7 +110,6 @@
 
     </div>
 </body>
-
 
 <script src="scripts/vendorjs.min.js"></script>
 <script src="scripts/common.min.js"></script>
