@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="MD-Resources/PingerHeadFile.png"/>
+  <img src="MD-Resources/PingerHeadFile.png" />
 </p>
 
 ---
