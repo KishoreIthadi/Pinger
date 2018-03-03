@@ -4,6 +4,11 @@
 
 ---
 
+<p align="center">
+  <img src="MD-Resources/Pinger_BlackBorder.gif"/>
+</p>
+
+---
 
 ## Table of Contents
 * [What is **PINGER**?](#what-is-pinger)
@@ -80,7 +85,7 @@
 You can install the **Pinger** from chrome WebStore or using the developer mode option on chrome settings.
 
 #### Chrome Web store
-[![get from chrome web store](/MD-Resources/available_on_chrome_web_store.png)](https://chrome.google.com/webstore/detail/pinger/jcoegkmjenfpgmkoeomahaioddaajfdk)
+[![get from chrome web store](/MD-Resources/WebStore.png)](https://chrome.google.com/webstore/detail/pinger/jcoegkmjenfpgmkoeomahaioddaajfdk)
 
 ---
 
