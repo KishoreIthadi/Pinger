@@ -36,7 +36,7 @@ var config = (function () {
         info: 3
     };
 
-    var baseURL = "http://35.225.102.180/api";
+    var baseURL = "http://pinger.dotnettech.in/api";
     
     var URL = {
         baseURL: baseURL,
