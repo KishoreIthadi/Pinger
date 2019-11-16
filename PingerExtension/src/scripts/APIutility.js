@@ -55,27 +55,27 @@ var APIUtility = (function () {
 
                             data.forEach(function (item) {
 
-                                var updatedObj = localStorageUtility.retriveItem(item.Key);
+                                var updatedObj = localStorageUtility.retriveItem(item.key);
                                 updatedObj.sendEmail = false;
 
-                                if (item.PreviousState == config.taskStatus.checking &&
-                                    item.UpdatedState == config.taskStatus.dead) {
+                                if (item.previousState == config.taskStatus.checking &&
+                                    item.updatedState == config.taskStatus.dead) {
                                     // This condition executes when the entity is added for the first time and it fails
                                     updatedObj.sendEmail = true;
-                                } else if (item.PreviousState != config.taskStatus.checking &&
-                                    item.PreviousState != item.UpdatedState) {
+                                } else if (item.previousState != config.taskStatus.checking &&
+                                    item.previousState != item.updatedState) {
                                     updatedObj.sendEmail = true;
                                 }
 
-                                updatedObj.status = item.UpdatedState;
-                                updatedObj.previousStatus = item.UpdatedState;
+                                updatedObj.status = item.updatedState;
+                                updatedObj.previousStatus = item.updatedState;
 
                                 updatedObj.unableToRetrive = false;
 
-                                localStorageUtility.updateItem(item.Key, updatedObj);
+                                localStorageUtility.updateItem(item.key, updatedObj);
 
                                 if (!isBackGroundTask) {
-                                    UIUtility.updateStatus(item.Key);
+                                    UIUtility.updateStatus(item.key);
                                 }
                             });
                         },
