@@ -7,7 +7,7 @@
 
   "description": "Pinger is a simple but elegant chrome extension to monitor the status of a remote server, website or a remote DB.",
 
-  "version": "0.0.0.2",
+  "version": "0.0.0.3",
 
   "icons": {
     "16": "images/pingerX16.png",
